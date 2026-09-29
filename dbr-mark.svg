@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" role="img" aria-label="Емблема ДБР">
+  <rect width="640" height="640" fill="#394556" />
+  <g fill="#cbd3df">
+    <path d="M320 73 355 130v354l-35 82-35-57V130z" />
+    <path d="m193 201 55 38v260l-55-38z" />
+    <path d="m447 201-55 38v260l55-38z" />
+  </g>
+</svg>

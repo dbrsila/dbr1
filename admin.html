@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#07111f" />
+    <title>Керування складом | ДБР</title>
+    <link rel="icon" type="image/svg+xml" href="/dbr-mark.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+  </head>
+  <body class="admin-body">
+    <header class="admin-header">
+      <a class="admin-brand" href="/"><img class="admin-brand-mark" src="/dbr-mark.svg" alt="" /><span><strong>ДБР</strong><small>Керування особовим складом</small></span></a>
+      <a class="admin-back" href="/">На сайт <i data-lucide="arrow-up-right"></i></a>
+    </header>
+    <main class="admin-main">
+      <section id="auth-view" class="admin-login glass">
+        <p class="section-kicker">Доступ для керівництва</p>
+        <h1 class="section-title">Панель керування</h1>
+        <p class="admin-intro">Введи адміністративний ключ із термінала, де запущено сервер.</p>
+        <form id="auth-form" class="admin-form">
+          <label class="admin-label" for="admin-token">Адміністративний ключ</label>
+          <input id="admin-token" class="admin-input" type="password" autocomplete="current-password" required placeholder="Встав ключ запуску" />
+          <button class="admin-primary" type="submit">Увійти <i data-lucide="arrow-right"></i></button>
+          <p id="auth-message" class="admin-message" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section id="admin-panel" class="hidden">
+        <div class="admin-title-row"><div><p class="section-kicker">DBR / STAFF DATABASE</p><h1 class="section-title">Особовий склад</h1></div><button id="logout-button" class="admin-secondary" type="button">Вийти <i data-lucide="log-out"></i></button></div>
+        <div class="admin-columns">
+          <section class="admin-box glass">
+            <div class="admin-box-heading"><i data-lucide="user-round-plus"></i><h2 id="staff-form-title">Додати працівника</h2></div>
+            <p class="admin-help">Введи Roblox username. Ім'я та аватар завантажаться з Roblox автоматично.</p>
+            <form id="staff-form" class="admin-form">
+              <label class="admin-label" for="roblox-username">Roblox username</label>
+              <input id="roblox-username" class="admin-input" name="username" autocomplete="off" required minlength="3" maxlength="20" placeholder="Наприклад: Builderman" />
+              <label class="admin-label" for="staff-rank">Звання</label>
+              <select id="staff-rank" class="admin-input" name="rank" required></select>
+              <label class="admin-label" for="staff-department">Відділ</label>
+              <select id="staff-department" class="admin-input" name="department" required></select>
+              <label class="admin-label" for="staff-callsign">Позивний <span class="optional">необов'язково</span></label>
+              <input id="staff-callsign" class="admin-input" name="call_sign" maxlength="40" placeholder="Наприклад: Оріон-01" />
+              <div class="admin-form-actions"><button id="save-staff" class="admin-primary" type="submit">Додати до бази <i data-lucide="plus"></i></button><button id="cancel-edit" class="admin-secondary hidden" type="button">Скасувати</button></div>
+              <p id="staff-message" class="admin-message" role="status" aria-live="polite"></p>
+            </form>
+          </section>
+          <section class="admin-box glass">
+            <div class="admin-box-heading"><i data-lucide="users-round"></i><h2>Записи бази</h2><span id="staff-count" class="admin-count">0</span></div>
+            <div id="admin-staff-list" class="admin-staff-list"></div>
+          </section>
+        </div>
+
+        <section class="admin-box glass admin-news-box">
+          <div class="admin-box-heading"><i data-lucide="newspaper"></i><h2>Керування новинами</h2><span id="news-count" class="admin-count">0</span></div>
+          <p class="admin-help">Публікації зберігаються у data/news.json і з’являються на сайті та в стрічці у шапці.</p>
+          <form id="news-form" class="admin-form admin-news-form">
+            <label class="admin-label" for="news-date">Дата<input id="news-date" class="admin-input" name="date" type="date" required /></label>
+            <label class="admin-label" for="news-category-input">Розділ<input id="news-category-input" class="admin-input" name="category" required maxlength="40" placeholder="Оголошення" /></label>
+            <label class="admin-label admin-news-wide" for="news-title-input">Заголовок<input id="news-title-input" class="admin-input" name="title" required maxlength="140" placeholder="Короткий заголовок новини" /></label>
+            <label class="admin-label admin-news-wide" for="news-summary-input">Короткий опис <span class="optional">необов’язково</span><input id="news-summary-input" class="admin-input" name="summary" maxlength="300" placeholder="Одне речення для анонсу" /></label>
+            <label class="admin-label admin-news-wide" for="news-content-input">Текст новини<textarea id="news-content-input" class="admin-input admin-news-content" name="content" required maxlength="8000" rows="5" placeholder="Кожен абзац починай з нового рядка"></textarea></label>
+            <div class="admin-form-actions admin-news-wide"><button id="save-news" class="admin-primary" type="submit">Опублікувати <i data-lucide="send"></i></button></div>
+            <p id="news-message" class="admin-message admin-news-wide" role="status" aria-live="polite"></p>
+          </form>
+          <div id="admin-news-list" class="admin-news-list"></div>
+        </section>
+      </section>
+    </main>
+    <script>if (window.lucide) lucide.createIcons();</script>
+    <script type="module" src="admin.js"></script>
+  </body>
+</html>

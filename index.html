@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#07111f" />
+    <meta name="description" content="Державне бюро розслідувань — фракція рольового сервера. Служи закону. Захищай справедливість." />
+    <title>ДБР — Служи закону</title>
+    <link rel="icon" type="image/svg+xml" href="dbr-mark.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              midnight: '#07111f',
+              panel: '#0c1a2b',
+              cyan: '#62d9ee',
+              frost: '#dce9f4',
+              brass: '#c9a96e'
+            },
+            fontFamily: {
+              sans: ['Manrope', 'sans-serif'],
+              display: ['Oswald', 'sans-serif']
+            }
+          }
+        }
+      };
+    </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+  </head>
+  <body class="font-sans antialiased editorial-theme">
+    <!-- Intro plays once per browser session and can be dismissed immediately. -->
+    <div id="intro" class="fixed inset-0 z-[100] flex items-center justify-center overflow-hidden bg-midnight" aria-label="Вітаємо на сайті ДБР">
+      <div class="grid-texture absolute inset-0 opacity-70"></div>
+      <div class="noise pointer-events-none absolute inset-0 opacity-20"></div>
+      <div class="absolute left-8 top-8 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[.28em] text-slate-500 sm:left-12 sm:top-12"><span class="h-2 w-2 rounded-full bg-cyan shadow-[0_0_14px_#62d9ee]"></span> DBR / SYSTEM ONLINE</div>
+      <button id="skip-intro" class="absolute right-8 top-8 text-[10px] font-bold uppercase tracking-[.2em] text-slate-400 transition hover:text-white sm:right-12 sm:top-12">Пропустити <span aria-hidden="true">↗</span></button>
+      <div class="relative px-6 text-center">
+          <img class="intro-mark" src="dbr-mark.svg" alt="" />
+        <p class="intro-word font-display text-3xl font-medium uppercase leading-tight text-white sm:text-5xl">Вітаємо вас<br class="sm:hidden" /> на сайті ДБР</p>
+        <div class="intro-line mx-auto mt-8 h-px w-36 origin-center bg-gradient-to-r from-transparent via-cyan to-transparent"></div>
+        <p class="mt-5 text-[10px] font-bold uppercase tracking-[.3em] text-slate-500">Державне бюро розслідувань</p>
+      </div>
+      <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-[9px] uppercase tracking-[.3em] text-slate-600">Справедливість не має вихідних</div>
+    </div>
+
+    <header class="fixed inset-x-0 top-0 z-50 border-b border-white/[.06] bg-midnight/75 backdrop-blur-xl">
+      <nav class="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-5 sm:px-8" aria-label="Головна навігація">
+        <a href="#home" class="group flex items-center gap-3" aria-label="ДБР — на головну">
+          <img class="site-mark" src="dbr-mark.svg" alt="" />
+          <span><span class="block font-display text-[17px] font-semibold uppercase tracking-[.13em] text-white">ДБР</span><span class="block text-[8px] font-bold uppercase tracking-[.19em] text-slate-500">Державне бюро розслідувань</span></span>
+        </a>
+        <a id="header-news-ticker" class="header-news-ticker" href="news.html" aria-label="Відкрити новини ДБР">
+          <span class="header-news-label"><span class="news-live-dot"></span> Остання новина</span>
+          <span class="header-news-copy"><strong id="header-news-title">Новини бюро</strong><span id="header-news-date">Стрічка ДБР</span></span>
+          <i data-lucide="arrow-up-right" class="h-4 w-4"></i>
+        </a>
+        <div class="hidden items-center gap-8 md:flex">
+          <a class="nav-link" href="#home">Головна</a><a class="nav-link" href="news.html">Новини</a><a class="nav-link" href="#staff">Склад</a><a class="nav-link" href="#careers">Кар'єра</a><a class="nav-link" href="#contacts">Контакти</a>
+        </div>
+        <a href="#careers" class="hidden items-center gap-2 border border-cyan/40 px-4 py-2.5 text-[10px] font-extrabold uppercase tracking-[.14em] text-cyan transition hover:bg-cyan hover:text-midnight sm:inline-flex">Кар'єрний шлях <i data-lucide="arrow-up-right" class="h-3.5 w-3.5"></i></a>
+        <button id="menu-toggle" class="flex h-10 w-10 items-center justify-center border border-white/10 text-slate-200 md:hidden" aria-label="Відкрити меню" aria-expanded="false"><i data-lucide="menu" class="h-5 w-5"></i></button>
+      </nav>
+      <div id="mobile-menu" class="hidden border-t border-white/[.06] bg-midnight/95 px-5 py-4 md:hidden">
+        <div class="mx-auto grid max-w-7xl gap-1"><a class="mobile-link" href="#home">Головна</a><a class="mobile-link" href="news.html">Новини</a><a class="mobile-link" href="#staff">Склад</a><a class="mobile-link" href="#careers">Кар'єра</a><a class="mobile-link" href="#contacts">Контакти</a></div>
+      </div>
+    </header>
+
+    <main>
+      <section id="home" class="hero-image relative flex min-h-[740px] items-center overflow-hidden bg-cover bg-[center_42%] pt-24 sm:min-h-[820px]">
+        <div class="grid-texture pointer-events-none absolute inset-0 opacity-30"></div>
+        <div class="absolute right-[7%] top-[27%] hidden h-56 w-56 rounded-full border border-cyan/10 lg:block"><div class="absolute inset-5 rounded-full border border-cyan/[.08]"></div><div class="absolute left-1/2 top-0 h-2 w-2 -translate-x-1/2 rounded-full bg-cyan shadow-[0_0_16px_#62d9ee]"></div></div>
+        <div class="relative mx-auto grid w-full max-w-7xl items-end gap-14 px-5 pb-24 pt-20 sm:px-8 lg:pb-32">
+          <div class="max-w-3xl">
+            <div class="mb-7 flex items-center gap-3 text-[10px] font-extrabold uppercase tracking-[.28em] text-cyan"><span class="h-px w-10 bg-cyan"></span> Незалежність. Закон. Справедливість.</div>
+            <h1 class="font-display text-[clamp(4.6rem,12vw,9.5rem)] font-semibold uppercase leading-[.82] tracking-[.01em] text-white">Служи<br /><span class="text-cyan">закону.</span></h1>
+            <p class="mt-9 max-w-xl text-sm leading-7 text-slate-300 sm:text-base">Розслідуємо складні справи. Захищаємо права громадян. Будуємо правову державу разом.</p>
+            <div class="mt-9 flex flex-wrap items-center gap-4">
+              <a href="#careers" class="inline-flex items-center gap-3 bg-cyan px-6 py-4 text-[10px] font-extrabold uppercase tracking-[.16em] text-midnight transition hover:-translate-y-0.5 hover:shadow-[0_8px_32px_rgba(98,217,238,.24)]">Кар'єрний шлях <i data-lucide="arrow-right" class="h-4 w-4"></i></a>
+              <a href="#about" class="inline-flex items-center gap-2 px-4 py-4 text-[10px] font-bold uppercase tracking-[.16em] text-slate-300 transition hover:text-cyan">Дізнатися більше <i data-lucide="chevron-down" class="h-3.5 w-3.5"></i></a>
+            </div>
+          </div>
+          <div class="absolute bottom-8 right-8 hidden items-center gap-3 text-[9px] font-bold uppercase tracking-[.2em] text-slate-500 lg:flex"><span class="h-px w-10 bg-slate-600"></span> 48°27' N / 35°02' E</div>
+        </div>
+      </section>
+
+      <section id="about" class="relative border-y border-white/[.06] bg-[#091523]">
+        <div class="mx-auto grid max-w-7xl gap-12 px-5 py-20 sm:px-8 md:grid-cols-[.8fr_1.2fr] md:py-28">
+          <div class="reveal"><p class="section-kicker">01 / Хто ми</p><h2 class="section-title mt-5">Сила закону.<br /><span class="text-slate-500">Честь служби.</span></h2></div>
+          <div class="reveal md:pt-2"><p class="max-w-2xl text-lg leading-8 text-slate-200">Державне бюро розслідувань — команда фахівців, що стоїть на сторожі справедливості.</p><p class="mt-5 max-w-2xl text-sm leading-7 text-slate-400">Ми діємо професійно, неупереджено та відповідально. Кожне розслідування — це робота заради довіри до закону, а кожне рішення — відповідальність перед суспільством.</p>
+            <div class="mt-9 grid grid-cols-3 border-t border-white/10 pt-6"><div><p class="font-display text-3xl text-white">01</p><p class="mt-1 text-[9px] font-bold uppercase tracking-[.13em] text-slate-500">Законність</p></div><div><p class="font-display text-3xl text-white">02</p><p class="mt-1 text-[9px] font-bold uppercase tracking-[.13em] text-slate-500">Неупередженість</p></div><div><p class="font-display text-3xl text-white">03</p><p class="mt-1 text-[9px] font-bold uppercase tracking-[.13em] text-slate-500">Відповідальність</p></div></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="staff" class="mx-auto max-w-7xl px-5 py-20 sm:px-8 md:py-28">
+        <div class="reveal flex flex-wrap items-end justify-between gap-6">
+          <div><p class="section-kicker">02 / Особовий склад</p><h2 class="section-title mt-5">Обличчя<br /><span class="text-slate-500">служби.</span></h2></div>
+          <p class="max-w-sm text-sm leading-6 text-slate-400">Працівники ДБР на нашому рольовому сервері. Посилання на картці відкриває офіційний профіль Roblox із 3D-переглядом.</p>
+        </div>
+        <div id="staff-status" class="staff-status mt-8" role="status" aria-live="polite">Завантажуємо особовий склад...</div>
+        <div id="staff-grid" class="staff-grid mt-5" aria-live="polite"></div>
+      </section>
+
+      <section id="careers" class="border-y border-white/[.06] bg-[#091523]">
+        <div class="mx-auto max-w-7xl px-5 py-20 sm:px-8 md:py-28">
+          <div class="reveal flex flex-wrap items-end justify-between gap-6"><div><p class="section-kicker">03 / Кар'єра</p><h2 class="section-title mt-5">СИСТЕМА ПІДВИЩЕННЯ ДБР</h2></div><p class="max-w-sm text-sm leading-6 text-slate-400">Послідовне зростання, підтверджене службовою роботою.</p></div>
+          <div class="reveal promotion-policy mt-10 flex gap-4 border border-cyan/20 bg-cyan/[.04] p-5 sm:p-6"><i data-lucide="info" class="mt-0.5 h-5 w-5 shrink-0 text-cyan"></i><p class="text-xs leading-6 text-slate-300">Підвищення може бути надано за рішенням Директора або Заступника Директора ДБР з урахуванням активності співробітника, якості виконання службових обов'язків та внеску у роботу бюро.</p></div>
+
+          <div class="rank-group reveal mt-12">
+            <div class="rank-group-heading"><span class="rank-group-mark">01</span><div><p class="section-kicker">Молодший склад</p><h3 class="mt-1 font-display text-2xl uppercase text-white">Молодший склад</h3></div><span class="rank-group-count">4 ЗВАННЯ</span></div>
+            <div class="rank-grid">
+              <article class="rank-card glass"><div class="rank-card-top"><span class="rank-index">01</span><span class="rank-insignia" aria-hidden="true"></span></div><h4>Курсант</h4><ul><li>Пройти стажування у співробітників вищого керівництва.</li><li>Бути присутнім на одному з затримань.</li><li>Оформити щонайменше 6 звітів.</li></ul></article>
+              <article class="rank-card glass"><div class="rank-card-top"><span class="rank-index">02</span><span class="rank-insignia" aria-hidden="true"></span></div><h4>Капрал</h4><ul><li>Оформити щонайменше 20 звітів.</li></ul></article>
+              <article class="rank-card glass"><div class="rank-card-top"><span class="rank-index">03</span><span class="rank-insignia" aria-hidden="true"></span></div><h4>Сержант</h4><ul><li>Оформити щонайменше 30 звітів.</li></ul></article>
+              <article class="rank-card glass"><div class="rank-card-top"><span class="rank-index">04</span><span class="rank-insignia" aria-hidden="true"></span></div><h4>Старший Сержант</h4><ul><li>Оформити щонайменше 40 звітів.</li></ul></article>
+            </div>
+          </div>
+
+          <div class="rank-group reveal mt-14">
+            <div class="rank-group-heading"><span class="rank-group-mark">02</span><div><p class="section-kicker">Офіцерський склад</p><h3 class="mt-1 font-display text-2xl uppercase text-white">Офіцерський склад</h3></div><span class="rank-group-count">3 ЗВАННЯ</span></div>
+            <div class="rank-grid">
+              <article class="rank-card glass"><div class="rank-card-top"><span class="rank-index">05</span><span class="rank-insignia" aria-hidden="true"></span></div><h4>Молодший Лейтенант</h4><ul><li>Оформити щонайменше 60 звітів.</li></ul></article>
+              <article class="rank-card glass"><div class="rank-card-top"><span class="rank-index">06</span><span class="rank-insignia" aria-hidden="true"></span></div><h4>Лейтенант</h4><ul><li>Оформити щонайменше 90 звітів.</li></ul></article>
+              <article class="rank-card glass"><div class="rank-card-top"><span class="rank-index">07</span><span class="rank-insignia" aria-hidden="true"></span></div><h4>Старший Лейтенант</h4><ul><li>Оформити щонайменше 130 звітів.</li></ul></article>
+            </div>
+          </div>
+
+          <div class="rank-group reveal mt-14">
+            <div class="rank-group-heading"><span class="rank-group-mark rank-group-mark-gold">03</span><div><p class="section-kicker text-brass">Вище керівництво ДБР</p><h3 class="mt-1 font-display text-2xl uppercase text-white">Вище керівництво ДБР</h3></div><span class="rank-group-count">4 ЗВАННЯ</span></div>
+            <div class="rank-grid">
+              <article class="rank-card glass"><div class="rank-card-top"><span class="rank-index">08</span><span class="rank-insignia" aria-hidden="true"></span></div><h4>Капітан</h4><ul><li>Оформити щонайменше 180 звітів.</li></ul></article>
+              <article class="rank-card glass"><div class="rank-card-top"><span class="rank-index">09</span><span class="rank-insignia" aria-hidden="true"></span></div><h4>Майор</h4><ul><li>Оформити щонайменше 250 звітів.</li></ul></article>
+              <article class="rank-card glass"><div class="rank-card-top"><span class="rank-index">10</span><span class="rank-insignia" aria-hidden="true"></span></div><h4>Підполковник</h4><ul><li>Підвищення за згодою Директора ДБР.</li></ul></article>
+              <article class="rank-card rank-card-final glass"><div class="rank-card-top"><span class="rank-index">11</span><span class="rank-insignia" aria-hidden="true"></span></div><h4>Полковник</h4><ul><li>Найвище звання ДБР.</li><li>Присвоюється виключно за рішенням Директора ДБР.</li></ul></article>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer id="contacts" class="mx-auto max-w-7xl px-5 py-9 sm:px-8">
+      <div class="flex flex-col gap-7 border-b border-white/10 pb-8 sm:flex-row sm:items-center sm:justify-between">
+        <a href="#home" class="flex items-center gap-3"><img class="footer-mark" src="dbr-mark.svg" alt="" /><span class="font-display text-sm uppercase tracking-[.16em] text-white">ДБР</span></a>
+        <div class="flex flex-wrap gap-x-7 gap-y-3 text-[10px] font-bold uppercase tracking-[.13em] text-slate-500"><a class="transition hover:text-cyan" href="news.html">Новини</a><a class="transition hover:text-cyan" href="#staff">Особовий склад</a><a class="transition hover:text-cyan" href="#careers">Кар'єра</a><a class="transition hover:text-cyan" href="#contacts">Контакти</a></div>
+      </div>
+      <div class="flex flex-col gap-2 pt-5 text-[9px] uppercase tracking-[.12em] text-slate-600 sm:flex-row sm:justify-between"><span>© 2026 Державне бюро розслідувань</span><span>Фракція рольового сервера · Не є офіційним державним ресурсом</span></div>
+    </footer>
+
+    <script>
+      // Render the icon set after its CDN script is available.
+      if (window.lucide) lucide.createIcons();
+
+      const intro = document.getElementById('intro');
+      const dismissIntro = () => {
+        if (intro.classList.contains('intro-out')) return;
+        intro.classList.add('intro-out');
+        sessionStorage.setItem('dbr-intro-seen', 'true');
+        window.setTimeout(() => intro.remove(), 850);
+      };
+      if (sessionStorage.getItem('dbr-intro-seen')) intro.remove();
+      else window.setTimeout(dismissIntro, 3600);
+      const skipIntroButton = document.getElementById('skip-intro');
+      if (skipIntroButton) skipIntroButton.addEventListener('click', dismissIntro);
+      intro.addEventListener('click', (event) => { if (event.target === intro) dismissIntro(); });
+
+      const menuToggle = document.getElementById('menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+      menuToggle.addEventListener('click', () => {
+        const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
+        menuToggle.setAttribute('aria-expanded', String(!isOpen));
+        mobileMenu.classList.toggle('hidden', isOpen);
+        menuToggle.innerHTML = isOpen ? '<i data-lucide="menu" class="h-5 w-5"></i>' : '<i data-lucide="x" class="h-5 w-5"></i>';
+        lucide.createIcons();
+      });
+      mobileMenu.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.innerHTML = '<i data-lucide="menu" class="h-5 w-5"></i>';
+        lucide.createIcons();
+      }));
+
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      document.querySelectorAll('.reveal').forEach((element) => revealObserver.observe(element));
+
+    </script>
+    <script type="module" src="staff.js"></script>
+    <script src="news-ticker.js" defer></script>
+  </body>
+</html>
