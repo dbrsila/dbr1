@@ -43,7 +43,7 @@ function createNewsCard(item, index) {
 
   const body = document.createElement('div');
   body.className = 'news-card-body';
-  const paragraphs = Array.isArray(item.content) ? item.content : [item.content || ''];
+  const paragraphs = String(item.body || '').split('\n').map((line) => line.trim());
   paragraphs.filter(Boolean).forEach((paragraph) => body.append(textElement('p', '', paragraph)));
 
   article.append(copy, body);
@@ -55,7 +55,7 @@ function renderNews() {
   const selectedCategory = categorySelect.value;
   const visibleNews = allNews.filter((item) => {
     const matchesCategory = selectedCategory === 'all' || item.category === selectedCategory;
-    const searchableText = `${item.title} ${item.summary || ''} ${(item.content || []).toString()}`.toLocaleLowerCase('uk-UA');
+    const searchableText = `${item.title} ${item.summary || ''} ${item.body || ''}`.toLocaleLowerCase('uk-UA');
     return matchesCategory && searchableText.includes(searchTerm);
   });
 
@@ -75,9 +75,12 @@ function renderNews() {
 
 async function loadNews() {
   try {
-    const response = await fetch('data/news.json');
-    if (!response.ok) throw new Error('Не вдалося завантажити стрічку новин.');
-    const payload = await response.json();
+    const { data: payload, error } = await window.db
+      .from('news')
+      .select('*')
+      .order('date', { ascending: false })
+      .order('id', { ascending: false });
+    if (error) throw new Error('Не вдалося завантажити стрічку новин.');
     if (!Array.isArray(payload)) throw new Error('Файл новин має містити JSON-масив.');
     allNews = payload
       .filter((item) => item && item.title && item.date)
