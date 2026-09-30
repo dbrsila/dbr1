@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#07111f" />
     <title>Керування складом | ДБР</title>
-    <link rel="icon" type="image/svg+xml" href="/dbr-mark.svg" />
+    <link rel="icon" type="image/svg+xml" href="dbr-mark.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -14,17 +14,17 @@
   </head>
   <body class="admin-body">
     <header class="admin-header">
-      <a class="admin-brand" href="/"><img class="admin-brand-mark" src="/dbr-mark.svg" alt="" /><span><strong>ДБР</strong><small>Керування особовим складом</small></span></a>
-      <a class="admin-back" href="/">На сайт <i data-lucide="arrow-up-right"></i></a>
+      <a class="admin-brand" href="./"><img class="admin-brand-mark" src="dbr-mark.svg" alt="" /><span><strong>ДБР</strong><small>Керування особовим складом</small></span></a>
+      <a class="admin-back" href="./">На сайт <i data-lucide="arrow-up-right"></i></a>
     </header>
     <main class="admin-main">
       <section id="auth-view" class="admin-login glass">
         <p class="section-kicker">Доступ для керівництва</p>
         <h1 class="section-title">Панель керування</h1>
-        <p class="admin-intro">Введи адміністративний ключ із термінала, де запущено сервер.</p>
+        <p class="admin-intro">Введи адміністративний ключ, щоб відкрити панель керування.</p>
         <form id="auth-form" class="admin-form">
           <label class="admin-label" for="admin-token">Адміністративний ключ</label>
-          <input id="admin-token" class="admin-input" type="password" autocomplete="current-password" required placeholder="Встав ключ запуску" />
+          <input id="admin-token" class="admin-input" type="password" autocomplete="current-password" required placeholder="Встав ключ входу" />
           <button class="admin-primary" type="submit">Увійти <i data-lucide="arrow-right"></i></button>
           <p id="auth-message" class="admin-message" role="status" aria-live="polite"></p>
         </form>
@@ -57,7 +57,7 @@
 
         <section class="admin-box glass admin-news-box">
           <div class="admin-box-heading"><i data-lucide="newspaper"></i><h2>Керування новинами</h2><span id="news-count" class="admin-count">0</span></div>
-          <p class="admin-help">Публікації зберігаються у data/news.json і з’являються на сайті та в стрічці у шапці.</p>
+          <p class="admin-help">Публікації зберігаються в базі Supabase і з’являються на сайті та в стрічці у шапці.</p>
           <form id="news-form" class="admin-form admin-news-form">
             <label class="admin-label" for="news-date">Дата<input id="news-date" class="admin-input" name="date" type="date" required /></label>
             <label class="admin-label" for="news-category-input">Розділ<input id="news-category-input" class="admin-input" name="category" required maxlength="40" placeholder="Оголошення" /></label>
@@ -72,6 +72,8 @@
       </section>
     </main>
     <script>if (window.lucide) lucide.createIcons();</script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
     <script type="module" src="admin.js"></script>
   </body>
 </html>
