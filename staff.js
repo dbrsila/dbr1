@@ -50,17 +50,9 @@ async function loadStaff() {
   staffStatus.textContent = 'Завантажуємо особовий склад...';
   let staff;
   try {
-    const configResponse = await fetch('pages-config.json');
-    const config = configResponse.ok ? await configResponse.json() : { static: false };
-    if (config.static) {
-      const response = await fetch('data/staff.json');
-      if (!response.ok) throw new Error('Не вдалося завантажити особовий склад.');
-      staff = await response.json();
-    } else {
-      const response = await fetch('api/staff');
-      if (!response.ok) throw new Error('Не вдалося отримати список працівників.');
-      staff = await response.json();
-    }
+    const { data, error } = await window.db.from('staff').select('*').order('created_at', { ascending: true });
+    if (error) throw new Error('Не вдалося завантажити особовий склад.');
+    staff = data;
     staffGrid.replaceChildren();
     if (!staff.length) {
       staffStatus.textContent = 'Особовий склад ще не додано.';
