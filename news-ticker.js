@@ -1,11 +1,14 @@
 const ticker = document.querySelector('#header-news-ticker');
 
 async function loadLatestNews() {
-  if (!ticker) return;
+  if (!ticker || !window.db) return;
   try {
-    const response = await fetch('data/news.json');
-    if (!response.ok) return;
-    const news = await response.json();
+    const { data: news, error } = await window.db
+      .from('news')
+      .select('title,date')
+      .order('date', { ascending: false })
+      .limit(5);
+    if (error) return;
     if (!Array.isArray(news) || news.length === 0) return;
 
     const latest = [...news]
