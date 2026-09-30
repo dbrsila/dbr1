@@ -165,7 +165,7 @@ function showAdmin() {
 
 async function authenticate(email, password) {
   const { error } = await db.auth.signInWithPassword({ email, password });
-  if (error) throw new Error('Невірний email або пароль.');
+  if (error) throw new Error('Невірний ключ.');
   showAdmin();
 }
 
@@ -207,7 +207,7 @@ async function deleteEmployee(employee) {
 
 authForm.addEventListener('submit', async (event) => {
   event.preventDefault();
-  const email = document.querySelector('#admin-email').value.trim();
+  const email = window.DBR_ADMIN_EMAIL;
   const password = document.querySelector('#admin-token').value;
   setMessage(authMessage, 'Перевіряємо дані...');
   try {
@@ -265,7 +265,13 @@ newsForm.addEventListener('submit', async (event) => {
   setMessage(newsMessage, 'Публікуємо новину...');
   saveNewsButton.disabled = true;
   try {
-    unwrap(await db.from('news').insert(payload));
+    unwrap(await db.from('news').insert({
+      title: payload.title,
+      summary: payload.summary || '',
+      category: payload.category,
+      date: payload.date,
+      body: payload.body ?? payload.content ?? payload.text ?? payload.message ?? ''
+    }));
     newsForm.reset();
     newsForm.elements.date.value = localDateInputValue();
     setMessage(newsMessage, 'Новину опубліковано. Вона вже з’явилася на сайті.');
